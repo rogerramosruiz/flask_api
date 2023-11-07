@@ -1,10 +1,15 @@
-from flask import Flask, abort, jsonify
+from flask import Flask, jsonify
 from connection import connection
+from flask_cors import CORS, cross_origin
 
 
 app = Flask(__name__)
 
+origin = 'locahost'
+CORS(app)
+
 @app.route('/api/info/<ci>', methods=['GET'])
+@cross_origin()
 def get_users(ci):
      with connection() as (cur, _):
         query = """
